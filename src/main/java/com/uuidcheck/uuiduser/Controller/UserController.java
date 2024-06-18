@@ -20,13 +20,11 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers(){
-        System.out.println("getALlUsers---------------------");
         return new ResponseEntity<>(userService.getAllUser(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable UUID id){
-//        System.out.println("result came here with id"+id);
         return new ResponseEntity<>(userService.getUserByID(id), HttpStatus.OK);
     }
 
