@@ -14,20 +14,30 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+
     @Autowired
     private UserService userService;
+
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers(){
         System.out.println("getALlUsers---------------------");
         return new ResponseEntity<>(userService.getAllUser(), HttpStatus.OK);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable UUID id){
-        System.out.println("result came here with id"+id);
+//        System.out.println("result came here with id"+id);
         return new ResponseEntity<>(userService.getUserByID(id), HttpStatus.OK);
     }
+
     @PostMapping
     public ResponseEntity<User> addUser(@RequestBody User user){
         return new ResponseEntity<>(userService.adduser(user), HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<User> patchUser(@PathVariable UUID id, @RequestBody User user){
+        System.out.println("Request in the patch");
+        return new ResponseEntity<>(userService.patchuser(id,user), HttpStatus.UPGRADE_REQUIRED);
     }
 }
